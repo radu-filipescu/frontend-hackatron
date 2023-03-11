@@ -43,10 +43,10 @@
 
   </div>
 
-  <div class="right-area">
+  <div class="right-area" >
     <div class="simulation-area">
       <div *ngIf="!selectedNode">
-        <canvas #canvas width="1600" height="830"></canvas>
+        <canvas #canvas width="1600" height="830" (contextmenu)="onRightClick($event)"></canvas>
         <div>
           <!-- <span style="position: relative; left: 780px; top: 400px">O</span> -->
           <div *ngFor="let node of networkNodes" (contextmenu)="onRightClick($event)">
