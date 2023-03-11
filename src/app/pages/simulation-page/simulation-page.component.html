@@ -7,18 +7,56 @@
 
     <br>
     <br>
-    <button (click)="initializeNetwork()">Initialize</button>
+    <button *ngIf="!networkInitialized" (click)="initializeNetwork()">Initialize</button>
     <br>
     <br>
     <br>
 
-    <button (click)="initializeNetwork()">Add node <fa-icon [icon]="faUserPlus"></fa-icon></button>
+    <div *ngIf="!networkInitialized">
+      <button (click)="openAddNodeModal()">Add node <fa-icon [icon]="faUserPlus"></fa-icon></button>
 
+      <div *ngIf="addingNodeModalVisible" class="adding-node-modal">
+        <div class="addingNodeHeader">Add new node:</div>
+
+        <div (click)="addNewNode()" class="add-node-button-close">
+          <fa-icon [icon]="faXmark"></fa-icon>
+        </div>
+
+        <br>
+        <label>Name</label> <br>
+        <input type="text" [(ngModel)]="newNode.name">
+        <br>
+        <br>
+        <br>
+
+        <label>Password</label> <br>
+        <input type="password" [(ngModel)]="newNode.password">
+
+
+        <div (click)="addNewNode()" class="add-node-button">
+          <fa-icon [icon]="faPlus"></fa-icon>
+        </div>
+      </div>
+
+
+    </div>
 
   </div>
 
   <div class="right-area">
     <div class="simulation-area">
+
+      <div>
+        <div *ngFor="let node of networkNodes">
+          <div style="position: absolute" [ngStyle]="{ 'left.px': node.displayX, 'top.px': node.displayY }">
+            <app-network-node [networkNode]="node" ></app-network-node>
+          </div>
+        </div>
+
+      </div>
+
+
+
 
     </div>
 

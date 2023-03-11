@@ -42,6 +42,7 @@ button:hover {
 }
 
 .simulation-area {
+  position: relative;
   background-color: #2E4F4F;
   width: 100%;
   height: 100%;
@@ -49,4 +50,68 @@ button:hover {
   -webkit-box-shadow: 10px 10px 18px 4px rgba(0,0,0,0.37);
   -moz-box-shadow: 10px 10px 18px 4px rgba(0,0,0,0.37);
   box-shadow: 10px 10px 18px 4px rgba(0,0,0,0.37);
+}
+
+.adding-node-modal {
+  z-index: 10;
+  position: absolute;
+  height: 30vh;
+  width: 30vw;
+  background-color: #0E8388;
+  left: 40vw;
+  border-radius: 10px;
+  border: 2px solid #2E4F4F;
+  -webkit-box-shadow: 10px 10px 18px 4px rgba(0,0,0,0.37);
+  -moz-box-shadow: 10px 10px 18px 4px rgba(0,0,0,0.37);
+  box-shadow: 10px 10px 18px 4px rgba(0,0,0,0.37);
+  padding: 20px;
+}
+
+.addingNodeHeader {
+  width: 100%;
+  text-align: center;
+  font-size: 29px;
+}
+
+label {
+  font-size: 21px;
+}
+
+input {
+  border-radius: 5px;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding: 4px;
+  margin-top: 5px;
+  width: 85%;
+}
+
+.add-node-button {
+  width: 60px;
+  height: 60px;
+  background-color: #2E4F4F;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 50px;
+  border: solid 2px #2C3333;
+  text-align: center;
+  font-size: 30px;
+  line-height: 60px;
+}
+
+.add-node-button:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 13px 12px 32px -16px rgba(0,0,0,0.66);
+  -moz-box-shadow: 13px 12px 32px -16px rgba(0,0,0,0.66);
+  box-shadow: 13px 12px 32px -16px rgba(0,0,0,0.66);
+}
+
+.add-node-button-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
 }
