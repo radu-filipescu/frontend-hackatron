@@ -40,6 +40,8 @@
     height: 90%;
     border-bottom: 1px solid #0E8388;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
 }
 
 .send-message {
@@ -65,5 +67,22 @@
 
     &:hover {
         background-color: #074244;
+    }
+}
+
+.message {
+    width: max-content;
+    padding: 10px;
+    margin: 5px;
+    color: #CBE4DE;
+    border-radius: 5px;
+
+    &.person {
+        background-color: #2E4F4F;
+        margin-left: auto;
+    }
+
+    &.bot{
+        background-color: #0E8388;
     }
 }
