@@ -1,12 +1,22 @@
 <div class="wrapper">
-    <img [src]="user.profilePic" alt="user"/>
-    <p>Name: {{ user.name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Hours spend: {{ user.hoursSpent }}</p>
+    <div class="sections">
+        <div class="info">
+            <h2>General information</h2>
     
-    <p>NFTs:</p>
-    <div class="nfts">
-        <img [src]="nft" alt="nft unlocked" *ngFor="let nft of user.nfts">
+            <img [src]="user.profilePic" alt="user" class="profile-pic"/>
+            <p>Name: {{ user.name }}</p>
+            <p>Email: {{ user.email }}</p>
+        </div>
+    
+        <div class="stats">
+            <h2>Your stats</h2>
+    
+            <p>NFTs:</p>
+            <div class="nfts">
+                <img [src]="nft" alt="nft unlocked" class="nft" *ngFor="let nft of user.nfts">
+            </div>
+            <span *ngIf="!user.nfts.length">Nothing to show here</span>
+            <p>Hours spend: {{ user.hoursSpent }}</p>
+        </div>
     </div>
-
 </div>

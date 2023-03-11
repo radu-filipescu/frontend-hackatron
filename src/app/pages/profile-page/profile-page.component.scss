@@ -1,0 +1,28 @@
+.wrapper {
+    width: 90vw;
+    margin: auto;
+    margin-top: 12px;
+    font-size: 1.5rem;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.sections {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nft {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+    box-shadow: 5px 5px 5px #888888;
+
+    &:hover{
+        box-shadow: 5px 10px 8px #888888;
+    }
+}
