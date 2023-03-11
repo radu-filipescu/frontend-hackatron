@@ -143,4 +143,22 @@ export class SimulationPageComponent implements OnInit {
     this.drawConnections();
   }
 
+  showNodeMenu: boolean = false;
+  nodeMenuX: number = 0;
+  nodeMenuY: number = 0;
+  nodeMenuFor: nodeInternal = new nodeInternal;
+
+  openNodeMenu(event: any, node: nodeInternal){
+    event.preventDefault();
+    this.showNodeMenu = true;
+    this.nodeMenuX = event.x - 400;
+    this.nodeMenuY = event.y - 120;
+    this.nodeMenuFor = node;
+  }
+
+  toggleMining(){
+    this.nodeMenuFor.isMining = !this.nodeMenuFor.isMining;
+    this.showNodeMenu = false;
+  }
+
 }

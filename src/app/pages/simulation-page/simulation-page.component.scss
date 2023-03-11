@@ -119,3 +119,18 @@ input {
 .hidden {
   visibility: hidden;
 }
+
+.node-menu{
+  background-color: #2C3333;
+  border-radius: 4px;
+  position:absolute;
+  padding: 5px;
+
+  a {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #171b1b;
+    }
+  }
+}
