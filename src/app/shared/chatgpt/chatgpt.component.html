@@ -4,5 +4,11 @@
 </div>
 
 <div class="chat-modal" [ngClass]="{'hidden': chatHidden}">
-    test
+    <div class="messages">
+
+    </div>
+    <div class="send-message">
+        <textarea [(ngModel)]="message" class="message-input" ></textarea>
+        <span class="send-message-btn">Send</span>
+    </div>
 </div>

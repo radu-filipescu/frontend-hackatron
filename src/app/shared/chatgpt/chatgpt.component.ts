@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { Configuration, OpenAIApi } from 'openai';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chatgpt',
@@ -9,8 +11,10 @@ import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 export class ChatgptComponent implements OnInit {
 
   chatHidden: boolean = true;
-  
+
   faQuestion = faQuestion;
+
+  message: string = '';
 
   constructor() { }
 

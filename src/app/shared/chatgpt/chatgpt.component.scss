@@ -33,4 +33,36 @@
     box-shadow: 2px 2px 2px #2E4F4F;
     right: 5vw;
     bottom: 5vh;
+    color: #2C3333;
+}
+
+.messages {
+    height: 90%;
+    border-bottom: 1px solid #0E8388;
+}
+
+.send-message {
+    height: calc(10% - 7px);
+}
+
+.message-input {
+    width: 80%;
+    height: 100%;
+    resize: none;
+}
+
+.send-message-btn {
+    width: calc(20% - 6px);
+    height: calc(100% - 1.8vh);
+    float: right;
+    background-color: #0E8388;
+    cursor: default;
+    color: #CBE4DE;
+    font-size: 1.3rem;
+    text-align: center;
+    padding-top: 2.5vh;
+
+    &:hover {
+        background-color: #074244;
+    }
 }

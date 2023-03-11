@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReadMorePageComponent } from './pages/read-more-page/read-more-page/read-more-page.component';
 import { SimulationPageComponent } from './pages/simulation-page/simulation-page.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SimulationPageComponent } from './pages/simulation-page/simulation-page
     AppRoutingModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
