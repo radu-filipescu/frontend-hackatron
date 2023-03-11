@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReadMorePageComponent } from './pages/read-more-page/read-more-page/read-more-page.component';
+import { SimulationPageComponent } from './pages/simulation-page/simulation-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReadMorePageComponent } from './pages/read-more-page/read-more-page/rea
     HomePageComponent,
     ProfilePageComponent,
     ChatgptComponent,
-    ReadMorePageComponent
+    ReadMorePageComponent,
+    SimulationPageComponent
   ],
   imports: [
     BrowserModule,
