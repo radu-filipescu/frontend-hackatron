@@ -2,43 +2,49 @@
 
   <div class="left-area">
     <div class="left-header">
-      my Blockchain network:
+      {{ selectedNode? selectedNode.name : 'my Blockchain network:'}}
     </div>
-
-    <br>
-    <br>
-    <button *ngIf="!networkInitialized" (click)="initializeNetwork()">Initialize</button>
-    <br>
     <br>
     <br>
 
-    <div *ngIf="!networkInitialized">
-      <button (click)="openAddNodeModal()">Add node <fa-icon [icon]="faUserPlus"></fa-icon></button>
-
-      <div *ngIf="addingNodeModalVisible" class="adding-node-modal">
-        <div class="addingNodeHeader">Add new node:</div>
-
-        <div (click)="addNewNode()" class="add-node-button-close">
-          <fa-icon [icon]="faXmark"></fa-icon>
+    <div *ngIf="!selectedNode"> <!-- meniu daca suntem pe network view -->
+      <button *ngIf="!networkInitialized" (click)="initializeNetwork()">Initialize</button>
+      <br>
+      <br>
+      <br>
+  
+      <div *ngIf="!networkInitialized">
+        <button (click)="openAddNodeModal()">Add node <fa-icon [icon]="faUserPlus"></fa-icon></button>
+  
+        <div *ngIf="addingNodeModalVisible" class="adding-node-modal">
+          <div class="addingNodeHeader">Add new node:</div>
+  
+          <div (click)="addNewNode()" class="add-node-button-close">
+            <fa-icon [icon]="faXmark"></fa-icon>
+          </div>
+  
+          <br>
+          <label>Name</label> <br>
+          <input type="text" [(ngModel)]="newNode.name">
+          <br>
+          <br>
+          <br>
+  
+          <label>Password</label> <br>
+          <input type="password" [(ngModel)]="newNode.password">
+  
+  
+          <div (click)="addNewNode()" class="add-node-button">
+            <fa-icon [icon]="faPlus"></fa-icon>
+          </div>
         </div>
-
-        <br>
-        <label>Name</label> <br>
-        <input type="text" [(ngModel)]="newNode.name">
-        <br>
-        <br>
-        <br>
-
-        <label>Password</label> <br>
-        <input type="password" [(ngModel)]="newNode.password">
-
-
-        <div (click)="addNewNode()" class="add-node-button">
-          <fa-icon [icon]="faPlus"></fa-icon>
-        </div>
+  
+  
       </div>
+    </div>    
 
-
+    <div *ngIf="selectedNode"> <!-- meniu daca suntem pe node view -->
+      <button *ngIf="!networkInitialized" (click)="selectedNode = null">Back</button>
     </div>
 
   </div>
@@ -50,8 +56,12 @@
         <div>
           <!-- <span style="position: relative; left: 780px; top: 400px">O</span> -->
           <div *ngFor="let node of networkNodes" (contextmenu)="onRightClick($event)">
-            <div style="position: absolute" [ngStyle]="{ 'left.px': node.displayX, 'top.px': node.displayY }" (dblclick)="selectedNode = node">
-              <app-network-node [networkNode]="node"></app-network-node>
+            <div style="position: absolute" 
+              [ngStyle]="{ 'left.px': node.displayX, 'top.px': node.displayY }" 
+              (dblclick)="selectedNode = node"
+              (drag)="dragNode($event, node)"
+              (dragstart)="dragNodeStart($event, node)">
+                <app-network-node [networkNode]="node"></app-network-node>
             </div>
           </div>
         </div>

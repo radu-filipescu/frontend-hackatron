@@ -105,6 +105,7 @@ export class SimulationPageComponent implements OnInit {
     if(!ctx) {
       return;
     }
+    ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
     ctx.beginPath();
 
     for(var i = 0; i < this.networkNodes.length; i++) {
@@ -117,6 +118,24 @@ export class SimulationPageComponent implements OnInit {
     }
     
     ctx.stroke();
+  }
+
+  dragNodeOffsetX: number = 0;
+  dragNodeOffsetY: number = 0;
+
+  dragNodeStart(event: any, node: nodeInternal){
+    this.dragNodeOffsetX = event.x - node.displayX - 240;
+    this.dragNodeOffsetY = event.y - node.displayY - 112;
+  }
+
+  dragNode(event: any, node: nodeInternal){
+    event.preventDefault();
+    if(event.x == 0 || event.y == 0){
+      return;
+    }
+    node.displayX = event.x - this.dragNodeOffsetX - 240;
+    node.displayY = event.y - this.dragNodeOffsetY - 112;
+    this.drawConnections();
   }
 
 }
