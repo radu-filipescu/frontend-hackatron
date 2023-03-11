@@ -47,7 +47,7 @@
     <div class="simulation-area">
 
       <div>
-        <div *ngFor="let node of networkNodes">
+        <div *ngFor="let node of networkNodes" (contextmenu)="onRightClick($event)">
           <div style="position: absolute" [ngStyle]="{ 'left.px': node.displayX, 'top.px': node.displayY }">
             <app-network-node [networkNode]="node" ></app-network-node>
           </div>

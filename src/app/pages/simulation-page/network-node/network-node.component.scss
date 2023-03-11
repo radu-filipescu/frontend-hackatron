@@ -1,6 +1,37 @@
 .wrapper {
+  position: relative;
   width: 50px;
   height: 50px;
   font-size: 50px;
   display: inline;
+}
+
+.balance {
+  position: absolute;
+  top: 0px;
+  right: -70px;
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+  font-family: gotham-bold;
+}
+
+.idle {
+  position: absolute;
+  top: 15px;
+  right: -35px;
+  font-size: 14px;
+  color: darkred;
+  font-weight: bold;
+  font-family: gotham-bold;
+}
+
+.mining {
+  position: absolute;
+  top: 15px;
+  right: -55px;
+  font-size: 14px;
+  color: green;
+  font-weight: bold;
+  font-family: gotham-bold;
 }
