@@ -8,7 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { ChatgptComponent } from './shared/chatgpt/chatgpt.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReadMorePageComponent } from './pages/read-more-page/read-more-page/read-more-page.component';
 import { SimulationPageComponent } from './pages/simulation-page/simulation-page.component';
@@ -32,6 +32,7 @@ import { NetworkNodeComponent } from './pages/simulation-page/network-node/netwo
     BrowserAnimationsModule,
     MatTooltipModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

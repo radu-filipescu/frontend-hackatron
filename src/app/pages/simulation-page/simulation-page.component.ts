@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faUserPlus, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { nodeDTO } from 'src/app/shared/DTOs/NodeDTO';
+import { NodesService } from 'src/app/shared/services/nodes.service';
 import { nodeInternal } from './classes/nodeInternal';
 
 @Component({
@@ -21,9 +22,10 @@ export class SimulationPageComponent implements OnInit {
 
   newNode: nodeDTO = new nodeDTO();
 
-  constructor() { }
+  constructor(private nodeService: NodesService) { }
 
   ngOnInit(): void {
+    this.refreshNodes();
   }
 
   initializeNetwork() {
@@ -39,6 +41,32 @@ export class SimulationPageComponent implements OnInit {
     //TODO:
 
     this.addingNodeModalVisible = false;
+  }
+
+  convertDTOtoNodesInternal(nodes: nodeDTO[]) {
+    let result: nodeInternal[] = [];
+
+    for(let i = 0; i < nodes.length; i++) {
+      let newNodeInternal = new nodeInternal();
+
+      newNodeInternal.id = nodes[i].id;
+      newNodeInternal.name = nodes[i].name;
+      newNodeInternal.balance = nodes[i].balance;
+      newNodeInternal.password = nodes[i].password;
+      newNodeInternal.displayX = (i + 1) * 100;
+      newNodeInternal.displayY = 100;
+
+      result.push(newNodeInternal);
+    }
+
+    return result;
+  }
+
+  refreshNodes() {
+    this.nodeService.getAllNodes()
+      .subscribe(nodes => {
+        this.networkNodes = this.convertDTOtoNodesInternal(nodes);
+      });
   }
 
 }

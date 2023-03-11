@@ -48,7 +48,9 @@
 
       <div>
         <div *ngFor="let node of networkNodes">
-          <app-network-node [networkNode]="node"></app-network-node>
+          <div style="position: absolute" [ngStyle]="{ 'left.px': node.displayX, 'top.px': node.displayY }">
+            <app-network-node [networkNode]="node" ></app-network-node>
+          </div>
         </div>
 
       </div>
