@@ -1,0 +1,12 @@
+<div class="wrapper">
+    <img [src]="user.profilePic" alt="user"/>
+    <p>Name: {{ user.name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Hours spend: {{ user.hoursSpent }}</p>
+    
+    <p>NFTs:</p>
+    <div class="nfts">
+        <img [src]="nft" alt="nft unlocked" *ngFor="let nft of user.nfts">
+    </div>
+
+</div>
