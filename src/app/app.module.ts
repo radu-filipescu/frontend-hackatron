@@ -14,6 +14,7 @@ import { ReadMorePageComponent } from './pages/read-more-page/read-more-page/rea
 import { SimulationPageComponent } from './pages/simulation-page/simulation-page.component';
 import { FormsModule } from '@angular/forms';
 import { NetworkNodeComponent } from './pages/simulation-page/network-node/network-node.component';
+import { NodeViewComponent } from './pages/simulation-page/node-view/node-view.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NetworkNodeComponent } from './pages/simulation-page/network-node/netwo
     ChatgptComponent,
     ReadMorePageComponent,
     SimulationPageComponent,
-    NetworkNodeComponent
+    NetworkNodeComponent,
+    NodeViewComponent
   ],
   imports: [
     BrowserModule,

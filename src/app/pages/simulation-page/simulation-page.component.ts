@@ -25,6 +25,8 @@ export class SimulationPageComponent implements OnInit {
 
   newNode: nodeDTO = new nodeDTO();
 
+  selectedNode: nodeInternal | null = null;
+
   constructor(private nodeService: NodesService) { }
 
   ngOnInit(): void {
@@ -108,7 +110,6 @@ export class SimulationPageComponent implements OnInit {
     for(var i = 0; i < this.networkNodes.length; i++) {
       for(var j = 0; j < this.networkNodes.length; j++){
         if(i != j){
-          console.log(this.networkNodes[i], this.networkNodes[j])
           ctx.moveTo(this.getXDraw(this.networkNodes[i].displayX), this.getYDraw(this.networkNodes[i].displayY));
           ctx.lineTo(this.getXDraw(this.networkNodes[j].displayX), this.getYDraw(this.networkNodes[j].displayY));
         }

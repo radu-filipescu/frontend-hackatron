@@ -45,27 +45,19 @@
 
   <div class="right-area">
     <div class="simulation-area">
-
-      <canvas #canvas width="1600" height="830"></canvas>
-      <div>
-        <!-- <span style="position: relative; left: 780px; top: 400px">O</span> -->
-        <div *ngFor="let node of networkNodes" (contextmenu)="onRightClick($event)">
-          <div style="position: absolute" [ngStyle]="{ 'left.px': node.displayX, 'top.px': node.displayY }">
-            <app-network-node [networkNode]="node" ></app-network-node>
+      <div *ngIf="!selectedNode">
+        <canvas #canvas width="1600" height="830"></canvas>
+        <div>
+          <!-- <span style="position: relative; left: 780px; top: 400px">O</span> -->
+          <div *ngFor="let node of networkNodes" (contextmenu)="onRightClick($event)">
+            <div style="position: absolute" [ngStyle]="{ 'left.px': node.displayX, 'top.px': node.displayY }" (dblclick)="selectedNode = node">
+              <app-network-node [networkNode]="node"></app-network-node>
+            </div>
           </div>
         </div>
-
       </div>
 
-
-
-
+      <app-node-view *ngIf="selectedNode" [node]="selectedNode"></app-node-view>
     </div>
-
   </div>
-
-
-
-
-
 </div>
