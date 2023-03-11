@@ -9,8 +9,10 @@ import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 export class ChatgptComponent implements OnInit {
 
   chatHidden: boolean = true;
-  
+
   faQuestion = faQuestion;
+
+  message: string = '';
 
   constructor() { }
 

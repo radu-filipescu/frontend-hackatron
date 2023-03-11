@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReadMorePageComponent } from './pages/read-more-page/read-more-page/read-more-page.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ReadMorePageComponent } from './pages/read-more-page/read-more-page/rea
     AppRoutingModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
