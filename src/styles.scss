@@ -12,3 +12,18 @@ body {
   background-color: #2C3333;
   color: #CBE4DE;
 }
+
+@font-face {
+  font-family: gotham-bold;
+  src: url(assets/GothamBold.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: gotham-book;
+  src: url(assets/GothamBook.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: gotham-light;
+  src: url(assets/GothamLight.ttf) format("opentype");
+}
