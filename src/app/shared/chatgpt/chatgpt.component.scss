@@ -11,3 +11,19 @@
 ::ng-deep.tooltip {
     font-size: 18px;
 }
+
+.hidden {
+    visibility: hidden;
+}
+
+.chat-modal {
+    position: absolute;
+    width: 30vw;
+    height: 80vh;
+    background-color: #CBE4DE;
+    border: 2px solid #0E8388;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #2E4F4F;
+    right: 5vw;
+    bottom: 5vh;
+}

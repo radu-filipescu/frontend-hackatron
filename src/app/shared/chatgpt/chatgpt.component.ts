@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatgptComponent implements OnInit {
 
+  chatHidden: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleChat(): void {
+    this.chatHidden = !this.chatHidden;
   }
 
 }
