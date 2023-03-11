@@ -46,6 +46,16 @@
   <div class="right-area">
     <div class="simulation-area">
 
+      <div>
+        <div *ngFor="let node of networkNodes">
+          <app-network-node [networkNode]="node"></app-network-node>
+        </div>
+
+      </div>
+
+
+
+
     </div>
 
   </div>

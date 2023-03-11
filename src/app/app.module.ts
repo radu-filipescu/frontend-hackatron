@@ -13,6 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReadMorePageComponent } from './pages/read-more-page/read-more-page/read-more-page.component';
 import { SimulationPageComponent } from './pages/simulation-page/simulation-page.component';
 import { FormsModule } from '@angular/forms';
+import { NetworkNodeComponent } from './pages/simulation-page/network-node/network-node.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     ProfilePageComponent,
     ChatgptComponent,
     ReadMorePageComponent,
-    SimulationPageComponent
+    SimulationPageComponent,
+    NetworkNodeComponent
   ],
   imports: [
     BrowserModule,
