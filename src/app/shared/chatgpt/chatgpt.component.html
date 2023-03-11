@@ -5,10 +5,21 @@
 
 <div class="chat-modal" [ngClass]="{'hidden': chatHidden}">
     <div class="messages">
-
+        <p class="person">
+            You: Test message.                                                                                                          
+        </p> 
+        <p class="bot">
+            ChatGPT: This is a test answer.                                                                                                          
+        </p> 
+        <div *ngFor="let item of chatConversation">
+            <p class="" [ngClass]="item.cssClass">
+                {{item.person}} :  {{item.response}}                                                                                                            
+            </p>     
+        </div>
+        <div><img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" *ngIf="showSpinner" width="50px" height="50px"></div>      
     </div>
     <div class="send-message">
         <textarea [(ngModel)]="message" class="message-input" ></textarea>
-        <span class="send-message-btn">Send</span>
+        <span class="send-message-btn" (click)="checkResponse()">Send</span>
     </div>
 </div>
