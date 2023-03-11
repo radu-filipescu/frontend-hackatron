@@ -17,7 +17,7 @@ export class HomePageComponent implements OnInit {
   }
 
   goToSimulator() {
-
+    this.router.navigate(['/simulation']);
   }
 
   goToReadMore() {
