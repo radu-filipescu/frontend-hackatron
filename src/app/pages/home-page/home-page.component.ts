@@ -15,4 +15,12 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  goToSimulator() {
+
+  }
+
+  goToReadMore() {
+
+  }
+
 }

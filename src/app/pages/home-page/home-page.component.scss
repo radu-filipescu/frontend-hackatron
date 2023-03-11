@@ -3,3 +3,41 @@ h1 {
     margin-top: 100px;
     font-size: 3.5rem;
 }
+
+.go-to-simulator {
+  position: absolute;
+  top: 70vh;
+  left: 10vw;
+  background-color: #0E8388;
+  height: 12vh;
+  width: 20vw;
+  border-radius: 15px;
+  font-family: gotham-bold;
+  font-size: 30px;
+}
+
+.go-to-simulator:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 17px 10px 24px 0px rgba(0,0,0,0.65);
+  -moz-box-shadow: 17px 10px 24px 0px rgba(0,0,0,0.65);
+  box-shadow: 17px 10px 24px 0px rgba(0,0,0,0.65);
+}
+
+.go-to-read {
+  position: absolute;
+  top: 70vh;
+  right: 10vw;
+  background-color: #0E8388;
+  height: 12vh;
+  width: 20vw;
+  border-radius: 15px;
+  font-family: gotham-bold;
+  font-size: 30px;
+}
+
+.go-to-read:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 17px 10px 24px 0px rgba(0,0,0,0.65);
+  -moz-box-shadow: 17px 10px 24px 0px rgba(0,0,0,0.65);
+  box-shadow: 17px 10px 24px 0px rgba(0,0,0,0.65);
+}
