@@ -44,15 +44,19 @@
     </div>    
 
     <div *ngIf="selectedNode"> <!-- meniu daca suntem pe node view -->
-      <button *ngIf="!networkInitialized" (click)="selectedNode = null">Back</button>
+      <button *ngIf="!networkInitialized" (click)="backToNetworkView()">Back</button>
     </div>
 
   </div>
 
   <div class="right-area" >
     <div class="simulation-area">
+      <canvas #canvas 
+        width="1600" height="830" 
+        (contextmenu)="onRightClick($event)"
+        [ngClass]="{'hidden': selectedNode}"></canvas>
+
       <div *ngIf="!selectedNode">
-        <canvas #canvas width="1600" height="830" (contextmenu)="onRightClick($event)"></canvas>
         <div>
           <!-- <span style="position: relative; left: 780px; top: 400px">O</span> -->
           <div *ngFor="let node of networkNodes" (contextmenu)="onRightClick($event)">

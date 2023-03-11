@@ -138,4 +138,9 @@ export class SimulationPageComponent implements OnInit {
     this.drawConnections();
   }
 
+  backToNetworkView(){
+    this.selectedNode = null;
+    this.drawConnections();
+  }
+
 }
