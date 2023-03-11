@@ -1,11 +1,18 @@
 .help-icon {
     border-radius: 50%;
     background-color: #CBE4DE;
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     position: absolute;
     bottom: -80px;
-    right: -80px;
+    right: -100px;
+    line-height: 80px;
+    padding-left: 40px;
+}
+
+.help-icon:hover {
+  cursor: pointer;
+  border: 4px solid #0E8388;
 }
 
 ::ng-deep.tooltip {

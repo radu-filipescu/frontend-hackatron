@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-chatgpt',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class ChatgptComponent implements OnInit {
 
   chatHidden: boolean = true;
+  
+  faQuestion = faQuestion;
 
   constructor() { }
 

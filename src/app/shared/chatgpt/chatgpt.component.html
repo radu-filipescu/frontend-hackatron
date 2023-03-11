@@ -1,4 +1,7 @@
-<div class="help-icon" matTooltip="Stuck? Ask ChatGPT for help!" matTooltipClass="tooltip" (click)="toggleChat()"></div>
+<div class="help-icon" matTooltip="Stuck? Ask ChatGPT for help!" matTooltipClass="tooltip" (click)="toggleChat()">
+
+  <fa-icon style="color: #2E4F4F; font-size: 50px" [icon]="faQuestion"></fa-icon>
+</div>
 
 <div class="chat-modal" [ngClass]="{'hidden': chatHidden}">
     test

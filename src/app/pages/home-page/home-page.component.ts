@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,9 +11,17 @@ export class HomePageComponent implements OnInit {
 
   faCoffee = faCoffee;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  goToSimulator() {
+
+  }
+
+  goToReadMore() {
+    this.router.navigate(['/readmore']);
   }
 
 }
