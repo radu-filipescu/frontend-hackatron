@@ -76,6 +76,16 @@ label {
   font-size: 21px;
 }
 
+input {
+  border-radius: 5px;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding: 4px;
+  margin-top: 5px;
+  width: 85%;
+}
+
 .add-node-button {
   width: 60px;
   height: 60px;
@@ -92,7 +102,15 @@ label {
 
 .add-node-button:hover {
   cursor: pointer;
-  -webkit-box-shadow: 13px 12px 32px -16px rgba(0,0,0,0.46);
-  -moz-box-shadow: 13px 12px 32px -16px rgba(0,0,0,0.46);
-  box-shadow: 13px 12px 32px -16px rgba(0,0,0,0.46);
+  -webkit-box-shadow: 13px 12px 32px -16px rgba(0,0,0,0.66);
+  -moz-box-shadow: 13px 12px 32px -16px rgba(0,0,0,0.66);
+  box-shadow: 13px 12px 32px -16px rgba(0,0,0,0.66);
+}
+
+.add-node-button-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
 }

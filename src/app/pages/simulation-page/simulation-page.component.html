@@ -18,9 +18,19 @@
       <div *ngIf="addingNodeModalVisible" class="adding-node-modal">
         <div class="addingNodeHeader">Add new node:</div>
 
+        <div (click)="addNewNode()" class="add-node-button-close">
+          <fa-icon [icon]="faXmark"></fa-icon>
+        </div>
+
         <br>
-        <label>Name</label>
-        <!-- <input type="text" [(ngModel)]="newNode.name"> -->
+        <label>Name</label> <br>
+        <input type="text" [(ngModel)]="newNode.name">
+        <br>
+        <br>
+        <br>
+
+        <label>Password</label> <br>
+        <input type="password" [(ngModel)]="newNode.password">
 
 
         <div (click)="addNewNode()" class="add-node-button">
