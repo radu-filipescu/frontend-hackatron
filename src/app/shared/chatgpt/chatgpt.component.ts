@@ -8,11 +8,17 @@ import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 })
 export class ChatgptComponent implements OnInit {
 
+  chatHidden: boolean = true;
+  
   faQuestion = faQuestion;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleChat(): void {
+    this.chatHidden = !this.chatHidden;
   }
 
 }
