@@ -12,6 +12,7 @@ body {
   background-color: #2C3333;
   color: #CBE4DE;
   font-family: gotham-bold;
+  overflow: hidden;
 }
 
 @font-face {
@@ -28,3 +29,6 @@ body {
   font-family: gotham-light;
   src: url(assets/GothamLight.ttf) format("opentype");
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

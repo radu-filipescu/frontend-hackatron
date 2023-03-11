@@ -6,17 +6,24 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ChatgptComponent } from './shared/chatgpt/chatgpt.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    ChatgptComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
