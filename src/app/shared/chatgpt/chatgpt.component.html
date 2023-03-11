@@ -5,6 +5,12 @@
 
 <div class="chat-modal" [ngClass]="{'hidden': chatHidden}">
     <div class="messages">
+        <p class="person">
+            You: Test message.                                                                                                          
+        </p> 
+        <p class="bot">
+            ChatGPT: This is a test answer.                                                                                                          
+        </p> 
         <div *ngFor="let item of chatConversation">
             <p class="" [ngClass]="item.cssClass">
                 {{item.person}} :  {{item.response}}                                                                                                            
