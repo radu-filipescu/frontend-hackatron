@@ -7,13 +7,29 @@
 
     <br>
     <br>
-    <button (click)="initializeNetwork()">Initialize</button>
+    <button *ngIf="!networkInitialized" (click)="initializeNetwork()">Initialize</button>
     <br>
     <br>
     <br>
 
-    <button (click)="initializeNetwork()">Add node <fa-icon [icon]="faUserPlus"></fa-icon></button>
+    <div *ngIf="!networkInitialized">
+      <button (click)="openAddNodeModal()">Add node <fa-icon [icon]="faUserPlus"></fa-icon></button>
 
+      <div *ngIf="addingNodeModalVisible" class="adding-node-modal">
+        <div class="addingNodeHeader">Add new node:</div>
+
+        <br>
+        <label>Name</label>
+        <!-- <input type="text" [(ngModel)]="newNode.name"> -->
+
+
+        <div (click)="addNewNode()" class="add-node-button">
+          <fa-icon [icon]="faPlus"></fa-icon>
+        </div>
+      </div>
+
+
+    </div>
 
   </div>
 

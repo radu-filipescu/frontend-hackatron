@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faU, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faUserPlus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { nodeDTO } from 'src/app/shared/DTOs/NodeDTO';
 
 @Component({
   selector: 'app-simulation-page',
@@ -9,8 +10,14 @@ import { faU, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 export class SimulationPageComponent implements OnInit {
 
   faUserPlus = faUserPlus;
+  faPlus = faPlus;
 
-  networkInitialised: boolean = false;
+  networkInitialized: boolean = false;
+  addingNodeModalVisible: boolean = true;
+
+  networkNodes: nodeDTO[] = [];
+
+  newNode: nodeDTO = new nodeDTO();
 
   constructor() { }
 
@@ -18,6 +25,15 @@ export class SimulationPageComponent implements OnInit {
   }
 
   initializeNetwork() {
+
+  }
+
+  openAddNodeModal() {
+    this.addingNodeModalVisible = true;
+    this.newNode = new nodeDTO();
+  }
+
+  addNewNode() {
 
   }
 
