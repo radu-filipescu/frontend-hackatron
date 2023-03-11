@@ -53,7 +53,8 @@ export class SimulationPageComponent implements OnInit {
       newNodeInternal.name = nodes[i].name;
       newNodeInternal.balance = nodes[i].balance;
       newNodeInternal.password = nodes[i].password;
-      newNodeInternal.displayX = (i + 1) * 100;
+      newNodeInternal.isMining = nodes[i].isMining = (i == 0) ? true : false;
+      newNodeInternal.displayX = (i * 3 + 2) * 100;
       newNodeInternal.displayY = 100;
 
       result.push(newNodeInternal);
@@ -67,6 +68,10 @@ export class SimulationPageComponent implements OnInit {
       .subscribe(nodes => {
         this.networkNodes = this.convertDTOtoNodesInternal(nodes);
       });
+  }
+
+  onRightClick(event: any) {
+    event.preventDefault();
   }
 
 }
