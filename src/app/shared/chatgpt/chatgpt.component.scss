@@ -7,3 +7,7 @@
     bottom: -80px;
     right: -80px;
 }
+
+::ng-deep.tooltip {
+    font-size: 18px;
+}
