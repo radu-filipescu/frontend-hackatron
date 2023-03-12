@@ -73,6 +73,9 @@ export class NodesService {
   }
 
   connectNodes(nodeName1: string, nodeName2: string){
+    this.updateCommands.emit("geth --exec admin.nodeInfo.enode attach \\\\.\\pipe\\" + nodeName1);
+    this.updateCommands.emit("geth --exec admin.addPeer('" + nodeName1 +".enode') attach //./pipe/" + nodeName2);
+
     let connDTO = new connectionDTO();
 
     connDTO.node1 = nodeName1;
