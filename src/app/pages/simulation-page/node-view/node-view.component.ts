@@ -3,6 +3,7 @@ import { NodesService } from 'src/app/shared/services/nodes.service';
 import { nodeInternal } from '../classes/nodeInternal';
 import { faComputer } from '@fortawesome/free-solid-svg-icons';
 import { userDTO } from 'src/app/shared/DTOs/user';
+import { transferDTO } from 'src/app/shared/DTOs/transferDTO';
 
 @Component({
   selector: 'app-node-view',
@@ -18,6 +19,11 @@ export class NodeViewComponent implements OnInit {
 
   nodeUsers: userDTO[] = [];
   loadedUsersCount: number = 0;
+
+  transactioning: boolean = false;
+  transferDTO: transferDTO = new transferDTO();
+
+  sumModalVisible: boolean = false;
 
   constructor(private nodeService: NodesService) { }
 
@@ -60,8 +66,6 @@ export class NodeViewComponent implements OnInit {
       this.nodeUsers[i].displayX = Math.round(this.nodeUsers[i].displayX);
       this.nodeUsers[i].displayY = Math.round(this.nodeUsers[i].displayY);
 
-      console.log(this.nodeUsers[i]);
-
       alpha += 2 * Math.PI / this.nodeUsers.length;
 
       setInterval( () => {
@@ -84,18 +88,45 @@ export class NodeViewComponent implements OnInit {
     this.userMenuX = event.x - 400;
     this.userMenuY = event.y - 120;
 
-    this.showUserMenu = false;
+    this.showUserMenu = true;
     this.selectedUser = user;
   }
 
   transactionModal(){
-    
+    this.transactioning = true;
+    this.showUserMenu = false;
   }
 
   setMiningUser(){
     this.nodeService.setUserToMine(this.node.name, this.selectedUser.idx).subscribe(
       () => {console.log("mining")}
     )
+  }
+
+  clickOnUser(clickedUser: userDTO) {
+    if(!this.transactioning)
+      return;
+
+    this.transferDTO = new transferDTO();
+
+    this.transferDTO.nodeName = this.node.name;
+    this.transferDTO.receiverIdx = clickedUser.idx;
+    this.transferDTO.senderIdx = this.selectedUser.idx;
+
+    this.sumModalVisible = true;
+  }
+
+  sendTransfer() {
+    console.log(this.transferDTO);
+
+    this.nodeService.transferFunds(this.transferDTO)
+      .subscribe( () => {
+        console.log('transfer made');
+      });
+
+
+    this.sumModalVisible = false;
+    this.transferDTO = new transferDTO();
   }
 
 }

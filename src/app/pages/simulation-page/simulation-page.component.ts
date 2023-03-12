@@ -39,7 +39,11 @@ export class SimulationPageComponent implements OnInit {
   }
 
   initializeNetwork() {
-    this.nodeService.initializeBlockchain().subscribe( () => { console.log('initialized')});
+    this.nodeService.initializeBlockchain().subscribe(
+      () => {
+        console.log('initialized')
+        this.ngOnInit();
+      });
   }
 
   openAddNodeModal() {

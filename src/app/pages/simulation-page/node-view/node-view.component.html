@@ -4,18 +4,27 @@
     <fa-icon [icon]="faComputer"></fa-icon>
   </div>
 
-  <div *ngFor="let user of nodeUsers" (contextmenu)="openUserMenu($event, user)">
+  <div *ngFor="let user of nodeUsers" (contextmenu)="openUserMenu($event, user)" (click)="clickOnUser(user)">
     <div style="position: absolute"
       [ngStyle]="{ 'left.px': user.displayX, 'top.px': user.displayY }">
         <app-user-node-view [userDTO]="user"></app-user-node-view>
     </div>
   </div>
 
-  <div class="node-menu" *ngIf="showUserMenu"
+  <div class="user-menu" *ngIf="showUserMenu"
     [ngStyle]="{ 'left.px': userMenuX, 'top.px': userMenuY }">
 
     <a (click)="transactionModal()">Start a transaction</a>
     <a (click)="setMiningUser()">Set mining user</a>
+  </div>
+
+  <div class="sum-modal" *ngIf="sumModalVisible">
+    <div class="sum-modal-header">Enter the amount to be transfered:</div>
+    <br>
+    <br>
+    <input class="sum-modal-input" type="text" [(ngModel)]="transferDTO.transferAmount">
+
+    <button class="sum-modal-button" (click)="sendTransfer()">send</button>
   </div>
 
 </div>

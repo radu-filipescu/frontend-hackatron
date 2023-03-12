@@ -1,6 +1,6 @@
 export class transferDTO {
-  senderId: string = "";
-  receiverId: string = "";
+  senderIdx: number = 0;
+  receiverIdx: number = 0;
   transferAmount: number = 0;
   nodeName: string = "";
 }
