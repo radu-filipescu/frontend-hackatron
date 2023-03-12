@@ -21,6 +21,8 @@
 
         <button (click)="connectingNodes = true">Connect nodes</button>
 
+        <p>{{ connectingNodes? 'Drag your mouse from a node to another to connect them.' : '' }}</p>
+
         <div *ngIf="addingNodeModalVisible" class="adding-node-modal">
           <div class="addingNodeHeader">Add new node:</div>
   

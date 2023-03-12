@@ -167,7 +167,7 @@ export class SimulationPageComponent implements OnInit {
       this.dragNodeOffsetX = event.x - node.displayX - 240;
       this.dragNodeOffsetY = event.y - node.displayY - 112;
     } else {
-      this.connectionStartX = event.x - 260;
+      this.connectionStartX = event.x - 410;
       this.connectionStartY = event.y - 132;
       this.nodeConnection.node1 = node;
     }
