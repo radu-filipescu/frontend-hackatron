@@ -63,15 +63,12 @@ export class SimulationPageComponent implements OnInit {
     for(let i = 0; i < nodes.length; i++) {
       let newNodeInternal = new nodeInternal();
 
-      newNodeInternal.id = nodes[i].id;
       newNodeInternal.name = nodes[i].name;
-      newNodeInternal.balance = nodes[i].balance;
-      newNodeInternal.password = nodes[i].password;
       newNodeInternal.isMining = nodes[i].isMining = (i == 0) ? true : false;
 
       newNodeInternal.displayX = originX + Math.cos(alpha) * r;
       newNodeInternal.displayY = originY + Math.sin(alpha) * r;
-      
+
       result.push(newNodeInternal);
 
       alpha += 2 * Math.PI / nodes.length;
@@ -85,11 +82,7 @@ export class SimulationPageComponent implements OnInit {
   }
 
   refreshNodes() {
-    this.nodeService.getAllNodes()
-      .subscribe(nodes => {
-        this.networkNodes = this.convertDTOtoNodesInternal(nodes);
-        this.drawConnections();
-      });
+    
   }
 
   getXDraw(actualX: number) {
@@ -116,7 +109,7 @@ export class SimulationPageComponent implements OnInit {
         }
       }
     }
-    
+
     ctx.stroke();
   }
 
@@ -177,15 +170,12 @@ export class SimulationPageComponent implements OnInit {
   addNode(){
     let newNodeInternal = new nodeInternal();
 
-    newNodeInternal.id = 'id';
     newNodeInternal.name = 'name';
-    newNodeInternal.balance = 0;
-    newNodeInternal.password = 'password';
     newNodeInternal.isMining = false;
 
     newNodeInternal.displayX = this.nodeMenuX;
     newNodeInternal.displayY = this.nodeMenuY;
- 
+
     this.networkNodes.push(newNodeInternal);
 
   }
