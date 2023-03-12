@@ -242,6 +242,11 @@ export class SimulationPageComponent implements OnInit {
       c.node1 = this.nodeConnection.node1;
       c.node2 = this.nodeConnection.node2;
       this.connectionList.push(c);
+
+      this.nodeService.connectNodes(this.networkNodes[c.node1].name, this.networkNodes[c.node2].name)
+        .subscribe( () => {
+          console.log('connected');
+        })
     }
 
     this.connectingNodes = false;
