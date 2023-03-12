@@ -103,7 +103,6 @@ export class SimulationPageComponent implements OnInit {
   }
 
   updateMiningAllNodes(){
-    console.log(this.networkNodes);
 
     for(let i = 0; i < this.networkNodes.length; i++){
       this.nodeService.checkMiningStatus(this.networkNodes[i].name)
@@ -161,8 +160,12 @@ export class SimulationPageComponent implements OnInit {
     ctx.beginPath();
 
     for(var i = 0; i < this.connectionList.length; i++){
-      ctx.moveTo(this.getXDraw(this.connectionList[i].node1.displayX), this.getYDraw(this.connectionList[i].node1.displayY));
-      ctx.lineTo(this.getXDraw(this.connectionList[i].node2.displayX), this.getYDraw(this.connectionList[i].node2.displayY));
+
+      let nodeFrom = this.networkNodes[this.connectionList[i].node1];
+      let nodeTo = this.networkNodes[this.connectionList[i].node2];
+
+      ctx.moveTo(this.getXDraw(nodeFrom.displayX), this.getYDraw(nodeFrom.displayY));
+      ctx.lineTo(this.getXDraw(nodeTo.displayX), this.getYDraw(nodeTo.displayY));
     }
 
     ctx.stroke();
@@ -171,10 +174,7 @@ export class SimulationPageComponent implements OnInit {
   dragNodeOffsetX: number = 0;
   dragNodeOffsetY: number = 0;
 
-  nodeConnection: Connection = {
-    node1: new nodeInternal(),
-    node2: new nodeInternal()
-  }
+  nodeConnection: Connection = new Connection();
 
   connectionStartX: number = 0;
   connectionStartY: number = 0;
@@ -187,41 +187,61 @@ export class SimulationPageComponent implements OnInit {
     ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
     ctx.beginPath();
 
+    for(var i = 0; i < this.connectionList.length; i++){
+
+      let nodeFrom = this.networkNodes[this.connectionList[i].node1];
+      let nodeTo = this.networkNodes[this.connectionList[i].node2];
+
+      ctx.moveTo(this.getXDraw(nodeFrom.displayX), this.getYDraw(nodeFrom.displayY));
+      ctx.lineTo(this.getXDraw(nodeTo.displayX), this.getYDraw(nodeTo.displayY));
+    }
+
     ctx.moveTo(this.getXDraw(this.connectionStartX), this.getYDraw(this.connectionStartY));
     ctx.lineTo(this.getXDraw(endX), this.getYDraw(endY));
 
     ctx.stroke();
   }
 
-  dragNodeStart(event: any, node: nodeInternal){
+  dragNodeStart(event: any, node: nodeInternal, idx: number){
     if(!this.connectingNodes){
       this.dragNodeOffsetX = event.x - node.displayX - 240;
       this.dragNodeOffsetY = event.y - node.displayY - 112;
     } else {
       this.connectionStartX = event.x - 410;
       this.connectionStartY = event.y - 132;
-      this.nodeConnection.node1 = node;
+      this.nodeConnection.node1 = idx;
     }
-    console.log(node);
   }
 
-  dragNodeEnd(event: any, node?: nodeInternal){
+  isConnectionNew(connection: Connection): boolean{
+    for(let i = 0; i < this.connectionList.length; i++){
+      if(connection.node1 == this.connectionList[i].node1 && connection.node2 == this.connectionList[i].node2){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  dragNodeEnd(event: any, node?: nodeInternal, idx?: number){
     if(!this.connectingNodes){
       return;
     }
-    if(node){
-      this.nodeConnection.node2 = node;
+    if(this.connectingNodes){
+      this.nodeConnection.node2 = idx!;
     }
     for(var i = 0; i < this.networkNodes.length; i++){
       if(event.x - 240 > this.networkNodes[i].displayX && event.x - 240 < this.networkNodes[i].displayX + 62 &&
         event.y - 112 > this.networkNodes[i].displayY && event.y - 112 < this.networkNodes[i].displayY + 61){
 
-        this.nodeConnection.node2 = this.networkNodes[i];
+        this.nodeConnection.node2 = i;
       }
     }
 
-    if(this.nodeConnection.node1 != this.nodeConnection.node2){
-      this.connectionList.push(this.nodeConnection);
+    if(this.nodeConnection.node1 != this.nodeConnection.node2 && this.isConnectionNew(this.nodeConnection)){
+      let c = new Connection();
+      c.node1 = this.nodeConnection.node1;
+      c.node2 = this.nodeConnection.node2;
+      this.connectionList.push(c);
     }
 
     this.connectingNodes = false;

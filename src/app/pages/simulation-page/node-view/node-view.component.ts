@@ -71,9 +71,10 @@ export class NodeViewComponent implements OnInit {
     ctx.clearRect(0, 0, this.usersCanvas.nativeElement.width, this.usersCanvas.nativeElement.height);
     ctx.beginPath();
 
-    ctx.moveTo(this.getXDraw(500), this.getYDraw(900));
+    
 
     for(var i = 0; i < this.nodeUsers.length; i++){
+      ctx.moveTo(this.getXDraw(500), this.getYDraw(900));
       ctx.lineTo(this.getXDraw(this.nodeUsers[i].displayX), this.getYDraw(this.nodeUsers[i].displayY));
     }
 
