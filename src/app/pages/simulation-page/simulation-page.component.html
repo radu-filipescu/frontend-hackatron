@@ -65,14 +65,14 @@
       <div *ngIf="!selectedNode">
         <div>
           <!-- <span style="position: relative; left: 780px; top: 400px">O</span> -->
-          <div *ngFor="let node of networkNodes" (contextmenu)="openNodeMenu($event, node)">
+          <div *ngFor="let node of networkNodes; let idx = index" (contextmenu)="openNodeMenu($event, node)">
 
             <div style="position: absolute"
               [ngStyle]="{ 'left.px': node.displayX, 'top.px': node.displayY }"
               (dblclick)="selectedNode = node"
               (drag)="dragNode($event, node)"
-              (dragstart)="dragNodeStart($event, node)"
-              (dragend)="dragNodeEnd($event, node)">
+              (dragstart)="dragNodeStart($event, node, idx)"
+              (dragend)="dragNodeEnd($event, node, idx)">
                 <app-network-node [networkNode]="node"></app-network-node>
             </div>
             <div class="node-menu" *ngIf="showNodeMenu"

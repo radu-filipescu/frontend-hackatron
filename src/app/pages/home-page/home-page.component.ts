@@ -24,4 +24,8 @@ export class HomePageComponent implements OnInit {
     this.router.navigate(['/readmore']);
   }
 
+  goToMore() {
+    this.router.navigate(['/more']);
+  }
+
 }

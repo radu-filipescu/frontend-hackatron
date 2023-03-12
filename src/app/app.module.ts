@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { NetworkNodeComponent } from './pages/simulation-page/network-node/network-node.component';
 import { NodeViewComponent } from './pages/simulation-page/node-view/node-view.component';
 import { UserNodeViewComponent } from './pages/simulation-page/node-view/user-node-view/user-node-view.component';
+import { MorePageComponent } from './pages/more-page/more-page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UserNodeViewComponent } from './pages/simulation-page/node-view/user-no
     SimulationPageComponent,
     NetworkNodeComponent,
     NodeViewComponent,
-    UserNodeViewComponent
+    UserNodeViewComponent,
+    MorePageComponent
   ],
   imports: [
     BrowserModule,
