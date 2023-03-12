@@ -19,8 +19,8 @@
 .idle {
   position: absolute;
   top: 15px;
-  right: -35px;
-  font-size: 14px;
+  left: 70px;
+  font-size: 17px;
   color: darkred;
   font-weight: bold;
   font-family: gotham-bold;
@@ -29,9 +29,17 @@
 .mining {
   position: absolute;
   top: 15px;
-  right: -55px;
-  font-size: 14px;
+  left: 70px;
+  font-size: 17px;
   color: green;
   font-weight: bold;
   font-family: gotham-bold;
+}
+
+.no-of-blocks {
+  position: absolute;
+  left: 70px;
+  top: 40px;
+  font-size: 17px;
+  white-space: nowrap;
 }

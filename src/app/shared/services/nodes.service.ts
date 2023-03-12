@@ -49,4 +49,8 @@ export class NodesService {
   checkMiningStatus(nodeName: string) {
     return this.httpClient.put<boolean>(this.nodesAPIUrl + 'checkMining', {'value': nodeName});
   }
+
+  getNumberOfBlocks(nodeName: string) {
+    return this.httpClient.put<number>(this.nodesAPIUrl + 'blocks', {'value': nodeName});
+  }
 }
