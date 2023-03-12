@@ -238,7 +238,10 @@ export class SimulationPageComponent implements OnInit {
     }
 
     if(this.nodeConnection.node1 != this.nodeConnection.node2 && this.isConnectionNew(this.nodeConnection)){
-      this.connectionList.push(this.nodeConnection);
+      let c = new Connection();
+      c.node1 = this.nodeConnection.node1;
+      c.node2 = this.nodeConnection.node2;
+      this.connectionList.push(c);
     }
 
     this.connectingNodes = false;
