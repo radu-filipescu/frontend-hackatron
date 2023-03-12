@@ -73,8 +73,29 @@ export class NodeViewComponent implements OnInit {
     }
   }
 
-  openUserMenu(event: any, user: userDTO){
+  userMenuX: number = 0;
+  userMenuY: number = 0;
+  showUserMenu: boolean = false;
+  selectedUser: userDTO = new userDTO();
 
+  openUserMenu(event: any, user: userDTO){
+    event.preventDefault();
+
+    this.userMenuX = event.x - 400;
+    this.userMenuY = event.y - 120;
+
+    this.showUserMenu = false;
+    this.selectedUser = user;
+  }
+
+  transactionModal(){
+    
+  }
+
+  setMiningUser(){
+    this.nodeService.setUserToMine(this.node.name, this.selectedUser.idx).subscribe(
+      () => {console.log("mining")}
+    )
   }
 
 }

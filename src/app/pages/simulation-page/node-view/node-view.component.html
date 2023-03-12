@@ -11,6 +11,13 @@
     </div>
   </div>
 
+  <div class="node-menu" *ngIf="showUserMenu"
+    [ngStyle]="{ 'left.px': userMenuX, 'top.px': userMenuY }">
+
+    <a (click)="transactionModal()">Start a transaction</a>
+    <a (click)="setMiningUser()">Set mining user</a>
+  </div>
+
 </div>
 
 
