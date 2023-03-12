@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NodesService } from 'src/app/shared/services/nodes.service';
 import { nodeInternal } from '../classes/nodeInternal';
 import { faComputer } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +19,8 @@ export class NodeViewComponent implements OnInit {
 
   nodeUsers: userDTO[] = [];
   loadedUsersCount: number = 0;
+
+  @ViewChild('usersCanvas') usersCanvas!: ElementRef<HTMLCanvasElement>;
 
   transactioning: boolean = false;
   transferDTO: transferDTO = new transferDTO();
@@ -51,6 +53,31 @@ export class NodeViewComponent implements OnInit {
           }
         }
       )
+  }
+
+  getXDraw(actualX: number) {
+    return Math.ceil(actualX + 20)
+  }
+
+  getYDraw(actualY: number) {
+    return Math.ceil(actualY + 24)
+  }
+
+  drawConnections(){
+    var ctx = this.usersCanvas.nativeElement.getContext('2d');
+    if(!ctx) {
+      return;
+    }
+    ctx.clearRect(0, 0, this.usersCanvas.nativeElement.width, this.usersCanvas.nativeElement.height);
+    ctx.beginPath();
+
+    ctx.moveTo(this.getXDraw(500), this.getYDraw(900));
+
+    for(var i = 0; i < this.nodeUsers.length; i++){
+      ctx.lineTo(this.getXDraw(this.nodeUsers[i].displayX), this.getYDraw(this.nodeUsers[i].displayY));
+    }
+
+    ctx.stroke();
   }
 
   computeAngles() {
@@ -93,8 +120,7 @@ export class NodeViewComponent implements OnInit {
   }
 
   transactionModal(){
-    this.transactioning = true;
-    this.showUserMenu = false;
+
   }
 
   setMiningUser(){
