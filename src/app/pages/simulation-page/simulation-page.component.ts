@@ -195,6 +195,7 @@ export class SimulationPageComponent implements OnInit {
     
     this.connectingNodes = false;
     this.drawConnections();
+    console.log(this.connectionList)
   }
 
   dragNode(event: any, node: nodeInternal){
