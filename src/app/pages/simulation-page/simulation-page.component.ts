@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faUserPlus, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Connection } from 'src/app/shared/DTOs/connection';
 import { nodeDTO } from 'src/app/shared/DTOs/NodeDTO';
 import { NodesService } from 'src/app/shared/services/nodes.service';
 import { nodeInternal } from './classes/nodeInternal';
@@ -10,6 +11,8 @@ import { nodeInternal } from './classes/nodeInternal';
   styleUrls: ['./simulation-page.component.scss']
 })
 export class SimulationPageComponent implements OnInit {
+
+  connectionList: Connection[] = [];
 
   faUserPlus = faUserPlus;
   faPlus = faPlus;
@@ -77,6 +80,24 @@ export class SimulationPageComponent implements OnInit {
       alpha += 2 * Math.PI / nodes.length;
     }
 
+    //add mock connections
+    this.connectionList.push({
+      node1: result[0],
+      node2: result[1]
+    });
+    this.connectionList.push({
+      node1: result[1],
+      node2: result[2]
+    });
+    this.connectionList.push({
+      node1: result[2],
+      node2: result[3]
+    });
+    this.connectionList.push({
+      node1: result[3],
+      node2: result[4]
+    });
+
     return result;
   }
 
@@ -108,13 +129,9 @@ export class SimulationPageComponent implements OnInit {
     ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
     ctx.beginPath();
 
-    for(var i = 0; i < this.networkNodes.length; i++) {
-      for(var j = 0; j < this.networkNodes.length; j++){
-        if(i != j){
-          ctx.moveTo(this.getXDraw(this.networkNodes[i].displayX), this.getYDraw(this.networkNodes[i].displayY));
-          ctx.lineTo(this.getXDraw(this.networkNodes[j].displayX), this.getYDraw(this.networkNodes[j].displayY));
-        }
-      }
+    for(var i = 0; i < this.connectionList.length; i++){
+      ctx.moveTo(this.getXDraw(this.connectionList[i].node1.displayX), this.getYDraw(this.connectionList[i].node1.displayY));
+      ctx.lineTo(this.getXDraw(this.connectionList[i].node2.displayX), this.getYDraw(this.connectionList[i].node2.displayY));
     }
     
     ctx.stroke();
@@ -123,9 +140,61 @@ export class SimulationPageComponent implements OnInit {
   dragNodeOffsetX: number = 0;
   dragNodeOffsetY: number = 0;
 
+  nodeConnection: Connection = {
+    node1: new nodeInternal(),
+    node2: new nodeInternal()
+  }
+
+  connectionStartX: number = 0;
+  connectionStartY: number = 0;
+
+  drawSingleConnection(endX: number, endY: number){
+    var ctx = this.canvas.nativeElement.getContext('2d');
+    if(!ctx) {
+      return;
+    }
+    ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+    ctx.beginPath();
+
+    ctx.moveTo(this.getXDraw(this.connectionStartX), this.getYDraw(this.connectionStartY));
+    ctx.lineTo(this.getXDraw(endX), this.getYDraw(endY));
+    
+    ctx.stroke();
+  }
+
   dragNodeStart(event: any, node: nodeInternal){
-    this.dragNodeOffsetX = event.x - node.displayX - 240;
-    this.dragNodeOffsetY = event.y - node.displayY - 112;
+    if(!this.connectingNodes){
+      this.dragNodeOffsetX = event.x - node.displayX - 240;
+      this.dragNodeOffsetY = event.y - node.displayY - 112;
+    } else {
+      this.connectionStartX = event.x - 260;
+      this.connectionStartY = event.y - 132;
+      this.nodeConnection.node1 = node;
+    }
+    console.log(node);
+  }
+
+  dragNodeEnd(event: any, node?: nodeInternal){
+    if(!this.connectingNodes){
+      return;
+    }
+    if(node){
+      this.nodeConnection.node2 = node;
+    }
+    for(var i = 0; i < this.networkNodes.length; i++){
+      if(event.x - 240 > this.networkNodes[i].displayX && event.x - 240 < this.networkNodes[i].displayX + 62 &&
+        event.y - 112 > this.networkNodes[i].displayY && event.y - 112 < this.networkNodes[i].displayY + 61){
+
+        this.nodeConnection.node2 = this.networkNodes[i];
+      }
+    }
+    
+    if(this.nodeConnection.node1 != this.nodeConnection.node2){
+      this.connectionList.push(this.nodeConnection);
+    }
+    
+    this.connectingNodes = false;
+    this.drawConnections();
   }
 
   dragNode(event: any, node: nodeInternal){
@@ -133,9 +202,14 @@ export class SimulationPageComponent implements OnInit {
     if(event.x == 0 || event.y == 0){
       return;
     }
-    node.displayX = event.x - this.dragNodeOffsetX - 240;
-    node.displayY = event.y - this.dragNodeOffsetY - 112;
-    this.drawConnections();
+    if(!this.connectingNodes){ 
+      node.displayX = event.x - this.dragNodeOffsetX - 240;
+      node.displayY = event.y - this.dragNodeOffsetY - 112;
+      this.drawConnections(); 
+    } else {
+      this.drawSingleConnection(event.x - 270, event.y - 132);
+    }
+    
   }
 
   backToNetworkView(){
@@ -187,7 +261,8 @@ export class SimulationPageComponent implements OnInit {
     newNodeInternal.displayY = this.nodeMenuY;
  
     this.networkNodes.push(newNodeInternal);
-
   }
+
+  connectingNodes: boolean = false;
 
 }

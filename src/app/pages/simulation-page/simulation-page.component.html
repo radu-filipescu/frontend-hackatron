@@ -15,7 +15,12 @@
   
       <div *ngIf="!networkInitialized">
         <button (click)="openAddNodeModal()">Add node <fa-icon [icon]="faUserPlus"></fa-icon></button>
-  
+        <br>
+        <br>
+        <br>
+
+        <button (click)="connectingNodes = true">Connect nodes</button>
+
         <div *ngIf="addingNodeModalVisible" class="adding-node-modal">
           <div class="addingNodeHeader">Add new node:</div>
   
@@ -54,17 +59,21 @@
       <canvas #canvas 
         width="1600" height="830" 
         (contextmenu)="openAddNodeMenu($event)"
+        (dragend)="dragNodeEnd($event, undefined)"
         [ngClass]="{'hidden': selectedNode}"></canvas>
 
       <div *ngIf="!selectedNode">
         <div>
           <!-- <span style="position: relative; left: 780px; top: 400px">O</span> -->
-          <div *ngFor="let node of networkNodes" (contextmenu)="openNodeMenu($event, node)">
+          <div *ngFor="let node of networkNodes" 
+            (contextmenu)="openNodeMenu($event, node)">
+            
             <div style="position: absolute" 
               [ngStyle]="{ 'left.px': node.displayX, 'top.px': node.displayY }" 
               (dblclick)="selectedNode = node"
               (drag)="dragNode($event, node)"
-              (dragstart)="dragNodeStart($event, node)">
+              (dragstart)="dragNodeStart($event, node)"
+              (dragend)="dragNodeEnd($event, node)">
                 <app-network-node [networkNode]="node"></app-network-node>
             </div>
             <div class="node-menu" *ngIf="showNodeMenu"
