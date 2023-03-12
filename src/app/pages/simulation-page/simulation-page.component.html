@@ -7,6 +7,12 @@
     <br>
     <br>
 
+    <div class="text-commands-wrapper">
+      <div *ngFor="let command of cliCommands">
+        <div class="command-bubble">{{command}}</div>
+      </div>
+    </div>
+
     <div *ngIf="!selectedNode"> <!-- meniu daca suntem pe network view -->
       <button (click)="initializeNetwork()">Initialize</button>
       <br>
@@ -20,10 +26,6 @@
 
         <div *ngIf="addingNodeModalVisible" class="adding-node-modal">
           <div class="addingNodeHeader">Add new node:</div>
-
-          <!-- <div (click)="addNewNode()" class="add-node-button-close">
-            <fa-icon [icon]="faXmark"></fa-icon>
-          </div> -->
 
           <br>
           <label>Name</label> <br>
@@ -40,7 +42,6 @@
             <fa-icon [icon]="faPlus"></fa-icon>
           </div> -->
         </div>
-
 
       </div>
     </div>

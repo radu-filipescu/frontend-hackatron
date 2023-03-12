@@ -1,8 +1,8 @@
 <div class="wrapper">
   <fa-icon [icon]="faComputer"></fa-icon>
 
-  <!-- <div class="balance">{{networkNode.balance}}ETH</div> -->
-
   <div *ngIf="!networkNode.isMining" class="idle">Idle</div>
   <div *ngIf="networkNode.isMining" class="mining">Mining</div>
+
+  <div class="no-of-blocks">{{noOfBlocks}} blocks</div>
 </div>
