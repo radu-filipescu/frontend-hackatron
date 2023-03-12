@@ -1,1 +1,16 @@
-<p>{{node.name}}</p>
+<div class="wrapper">
+
+  <div class="node">
+    <fa-icon [icon]="faComputer"></fa-icon>
+  </div>
+
+  <div *ngFor="let user of nodeUsers" (contextmenu)="openUserMenu($event, user)">
+    <div style="position: absolute"
+      [ngStyle]="{ 'left.px': user.displayX, 'top.px': user.displayY }">
+        <app-user-node-view [userDTO]="user"></app-user-node-view>
+    </div>
+  </div>
+
+</div>
+
+

@@ -59,11 +59,11 @@ export class SimulationPageComponent implements OnInit {
     let originY = 400;
     let r = 350;
 
+
     for(let i = 0; i < nodes.length; i++) {
       let newNodeInternal = new nodeInternal();
 
       newNodeInternal.name = nodes[i].name;
-      newNodeInternal.isMining = nodes[i].isMining = (i == 0) ? true : false;
 
       newNodeInternal.displayX = originX + Math.cos(alpha) * r;
       newNodeInternal.displayY = originY + Math.sin(alpha) * r;
@@ -72,8 +72,6 @@ export class SimulationPageComponent implements OnInit {
 
       alpha += 2 * Math.PI / nodes.length;
     }
-
-    this.updateMiningAllNodes();
 
     //add mock connections
     this.connectionList.push({
@@ -101,10 +99,14 @@ export class SimulationPageComponent implements OnInit {
   }
 
   updateMiningAllNodes(){
-    for(var i = 0; i < this.networkNodes.length; i++){
-      this.nodeService.checkMiningStatus(this.networkNodes[i].name).subscribe(data => {
-        this.networkNodes[i].isMining = data;
-      });
+    console.log(this.networkNodes);
+
+    for(let i = 0; i < this.networkNodes.length; i++){
+      this.nodeService.checkMiningStatus(this.networkNodes[i].name)
+        .subscribe(data => {
+          if(this.networkNodes[i])
+            this.networkNodes[i].isMining = data;
+        });
     }
   }
 
@@ -129,6 +131,7 @@ export class SimulationPageComponent implements OnInit {
   refreshNodes() {
     this.networkNodes = this.convertDTOtoNodesInternal(this.getNodes());
     setTimeout( () => {
+      this.updateMiningAllNodes();
       this.drawConnections();
     }, 100);
   }
@@ -178,7 +181,7 @@ export class SimulationPageComponent implements OnInit {
 
     ctx.moveTo(this.getXDraw(this.connectionStartX), this.getYDraw(this.connectionStartY));
     ctx.lineTo(this.getXDraw(endX), this.getYDraw(endY));
-    
+
     ctx.stroke();
   }
 
@@ -208,11 +211,11 @@ export class SimulationPageComponent implements OnInit {
         this.nodeConnection.node2 = this.networkNodes[i];
       }
     }
-    
+
     if(this.nodeConnection.node1 != this.nodeConnection.node2){
       this.connectionList.push(this.nodeConnection);
     }
-    
+
     this.connectingNodes = false;
     this.drawConnections();
     console.log(this.connectionList)
@@ -223,14 +226,14 @@ export class SimulationPageComponent implements OnInit {
     if(event.x == 0 || event.y == 0){
       return;
     }
-    if(!this.connectingNodes){ 
+    if(!this.connectingNodes){
       node.displayX = event.x - this.dragNodeOffsetX - 240;
       node.displayY = event.y - this.dragNodeOffsetY - 112;
-      this.drawConnections(); 
+      this.drawConnections();
     } else {
       this.drawSingleConnection(event.x - 270, event.y - 132);
     }
-    
+
   }
 
   backToNetworkView(){
@@ -256,12 +259,18 @@ export class SimulationPageComponent implements OnInit {
     if(this.nodeMenuFor.isMining){
       this.nodeService.stopMining(this.nodeMenuFor.name)
         .subscribe( ()=> {
-          this.updateMiningAllNodes();
+          setTimeout(() => {
+            this.updateMiningAllNodes();
+          }, 300);
         })
-    } else {
+    }
+    else {
       this.nodeService.startMining(this.nodeMenuFor.name)
         .subscribe( ()=> {
-          this.updateMiningAllNodes();
+          console.log('started!');
+          setTimeout(() => {
+            this.updateMiningAllNodes();
+          }, 300);
         })
     }
     this.showNodeMenu = false;

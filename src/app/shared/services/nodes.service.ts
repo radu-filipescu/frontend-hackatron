@@ -23,7 +23,7 @@ export class NodesService {
   }
 
   getUsersFromNode(nodeName: string) {
-    return this.httpClient.put(this.nodesAPIUrl + "getFromNode", {'value': nodeName});
+    return this.httpClient.put<string[]>(this.nodesAPIUrl + "getFromNode", {'value': nodeName});
   }
 
   setUserToMine(nodeName: string, userIdx: number) {
@@ -39,7 +39,7 @@ export class NodesService {
   }
 
   balance(nodeName: string, userIdx: number) {
-    return this.httpClient.put(this.nodesAPIUrl + "balance", {'nodeName': nodeName, 'userIndex': userIdx});
+    return this.httpClient.put<number>(this.nodesAPIUrl + "balance", {'nodeName': nodeName, 'userIndex': userIdx});
   }
 
   transferFunds(input: transferDTO) {
