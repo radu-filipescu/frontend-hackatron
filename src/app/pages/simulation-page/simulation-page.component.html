@@ -70,7 +70,6 @@
           <!-- <span style="position: relative; left: 780px; top: 400px">O</span> -->
           <div *ngFor="let node of networkNodes" (contextmenu)="openNodeMenu($event, node)">
 
-
             <div style="position: absolute"
               [ngStyle]="{ 'left.px': node.displayX, 'top.px': node.displayY }"
               (dblclick)="selectedNode = node"

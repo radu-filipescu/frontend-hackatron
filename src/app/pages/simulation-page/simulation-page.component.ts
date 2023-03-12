@@ -37,7 +37,7 @@ export class SimulationPageComponent implements OnInit {
   }
 
   initializeNetwork() {
-
+    this.nodeService.initializeBlockchain().subscribe( () => { console.log('initialized')});
   }
 
   openAddNodeModal() {
@@ -59,10 +59,6 @@ export class SimulationPageComponent implements OnInit {
     let originY = 400;
     let r = 350;
 
-    nodes.push(nodes[0])
-    nodes.push(nodes[0])
-    nodes.push(nodes[0])
-
     for(let i = 0; i < nodes.length; i++) {
       let newNodeInternal = new nodeInternal();
 
@@ -76,6 +72,8 @@ export class SimulationPageComponent implements OnInit {
 
       alpha += 2 * Math.PI / nodes.length;
     }
+
+    this.updateMiningAllNodes();
 
     //add mock connections
     this.connectionList.push({
@@ -102,8 +100,37 @@ export class SimulationPageComponent implements OnInit {
     event.preventDefault();
   }
 
+  updateMiningAllNodes(){
+    for(var i = 0; i < this.networkNodes.length; i++){
+      this.nodeService.checkMiningStatus(this.networkNodes[i].name).subscribe(data => {
+        this.networkNodes[i].isMining = data;
+      });
+    }
+  }
+
+  getNodes(){
+    var nodeList = [
+      new nodeDTO(),
+      new nodeDTO(),
+      new nodeDTO(),
+      new nodeDTO(),
+      new nodeDTO(),
+    ]
+
+    nodeList[0].name = 'privateChain1';
+    nodeList[1].name = 'privateChain2';
+    nodeList[2].name = 'privateChain3';
+    nodeList[3].name = 'privateChain4';
+    nodeList[4].name = 'privateChain5';
+
+    return nodeList;
+  }
+
   refreshNodes() {
-    
+    this.networkNodes = this.convertDTOtoNodesInternal(this.getNodes());
+    setTimeout( () => {
+      this.drawConnections();
+    }, 100);
   }
 
   getXDraw(actualX: number) {
@@ -226,7 +253,17 @@ export class SimulationPageComponent implements OnInit {
   }
 
   toggleMining(){
-    this.nodeMenuFor.isMining = !this.nodeMenuFor.isMining;
+    if(this.nodeMenuFor.isMining){
+      this.nodeService.stopMining(this.nodeMenuFor.name)
+        .subscribe( ()=> {
+          this.updateMiningAllNodes();
+        })
+    } else {
+      this.nodeService.startMining(this.nodeMenuFor.name)
+        .subscribe( ()=> {
+          this.updateMiningAllNodes();
+        })
+    }
     this.showNodeMenu = false;
   }
 

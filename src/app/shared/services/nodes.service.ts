@@ -47,6 +47,6 @@ export class NodesService {
   }
 
   checkMiningStatus(nodeName: string) {
-    return this.httpClient.put(this.nodesAPIUrl + 'checkMining', {'value': nodeName});
+    return this.httpClient.put<boolean>(this.nodesAPIUrl + 'checkMining', {'value': nodeName});
   }
 }
