@@ -71,7 +71,7 @@ export class NodeViewComponent implements OnInit {
     ctx.clearRect(0, 0, this.usersCanvas.nativeElement.width, this.usersCanvas.nativeElement.height);
     ctx.beginPath();
 
-    
+
 
     for(var i = 0; i < this.nodeUsers.length; i++){
       ctx.moveTo(this.getXDraw(500), this.getYDraw(900));
@@ -127,7 +127,10 @@ export class NodeViewComponent implements OnInit {
 
   setMiningUser(){
     this.nodeService.setUserToMine(this.node.name, this.selectedUser.idx).subscribe(
-      () => {console.log("mining")}
+      () => {
+        console.log("mining");
+        this.showUserMenu = false;
+      }
     )
   }
 
