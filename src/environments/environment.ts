@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   openai: {
-    OPENAI_API_KEY: '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',
+    //OPENAI_API_KEY: 'sk-kLDsKOhwu/  /JLZsUsBNKz/    /5T3BlbkFJvfs2Huusli5P2AUxeFJ6',
+    OPENAI_API_KEY: 'Ay1qOJjiTV4PTZIGLdKVT3BlbkFJknjvOSyenTzW2wZ1SroZ',
+
   }
 };
 

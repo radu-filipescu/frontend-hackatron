@@ -34,7 +34,7 @@ export class ChatgptComponent implements OnInit {
 
   //openai integration https://github.com/learnsmartcoding/ai-chat-bot-app-in-angular-using-chatGPT/blob/main/src/app/customer-support/customer-support.component.ts
   async invokeGPT() {
-  
+
     if(this.message.length<2)
       return;
 
@@ -46,7 +46,7 @@ export class ChatgptComponent implements OnInit {
       let requestData={
         model: 'text-davinci-003',//'text-davinci-003',//"text-curie-001",
         prompt: this.message,
-
+        max_tokens: 150
       };
       this.showSpinner = true;
       let apiResponse =  await openai.createCompletion(requestData);
@@ -59,10 +59,10 @@ export class ChatgptComponent implements OnInit {
       // Consider adjusting the error handling logic for your use case
       if (error.response) {
         console.error(error.response.status, error.response.data);
-        
+
       } else {
         console.error(`Error with OpenAI API request: ${error.message}`);
-        
+
       }
     }
   }

@@ -19,6 +19,7 @@
   border-radius: 4px;
   position:absolute;
   padding: 5px;
+  min-width: 180px;
 
   a {
     cursor: pointer;
@@ -28,4 +29,43 @@
       background-color: #171b1b;
     }
   }
+}
+
+.sum-modal {
+  position: absolute;
+  top: 30vh;
+  left: 25vw;
+  width: 30vw;
+  height: 15vh;
+  background-color: #0E8388;
+  border-radius: 15px;
+  padding: 20px;
+  border: 2px solid #2C3333;
+}
+
+.sum-modal-header {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.sum-modal-input {
+  height: 30px;
+  border-radius: 10px;
+}
+
+.sum-modal-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.sum-modal-button:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 17px 10px 24px 0px rgba(0,0,0,0.65);
+  -moz-box-shadow: 17px 10px 24px 0px rgba(0,0,0,0.65);
+  box-shadow: 17px 10px 24px 0px rgba(0,0,0,0.65);
 }
