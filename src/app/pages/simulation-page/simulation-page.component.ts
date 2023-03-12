@@ -84,24 +84,6 @@ export class SimulationPageComponent implements OnInit {
       alpha += 2 * Math.PI / nodes.length;
     }
 
-    //add mock connections
-    this.connectionList.push({
-      node1: result[0],
-      node2: result[1]
-    });
-    this.connectionList.push({
-      node1: result[1],
-      node2: result[2]
-    });
-    this.connectionList.push({
-      node1: result[2],
-      node2: result[3]
-    });
-    this.connectionList.push({
-      node1: result[3],
-      node2: result[4]
-    });
-
     return result;
   }
 
