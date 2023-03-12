@@ -49,11 +49,9 @@ export class NodeViewComponent implements OnInit {
 
   computeAngles() {
     let alpha = 0;
-    let originX = 770; //origin x and y
+    let originX = 670; //origin x and y
     let originY = 400;
     let r = 350;
-
-    console.log(this.nodeUsers);
 
     for(let i = 0; i < this.nodeUsers.length; i++) {
       this.nodeUsers[i].displayX = originX + Math.cos(alpha) * r;
@@ -65,6 +63,13 @@ export class NodeViewComponent implements OnInit {
       console.log(this.nodeUsers[i]);
 
       alpha += 2 * Math.PI / this.nodeUsers.length;
+
+      setInterval( () => {
+        this.nodeService.balance(this.node.name, this.nodeUsers[i].idx)
+          .subscribe( data => {
+            this.nodeUsers[i].balance = data;
+          })
+      }, 1500);
     }
   }
 
