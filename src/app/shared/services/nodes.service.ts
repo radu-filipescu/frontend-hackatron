@@ -19,7 +19,7 @@ export class NodesService {
   }
 
   createUser(nodeName: string) {
-    return this.httpClient.put(this.nodesAPIUrl + "createUser/", {'value': nodeName});
+    return this.httpClient.put<{'value': string}>(this.nodesAPIUrl + "createUser/", {'value': nodeName});
   }
 
   getUsersFromNode(nodeName: string) {

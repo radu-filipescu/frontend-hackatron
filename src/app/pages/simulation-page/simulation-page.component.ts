@@ -30,6 +30,8 @@ export class SimulationPageComponent implements OnInit {
 
   selectedNode: nodeInternal | null = null;
 
+  refreshing: boolean = false;
+
   constructor(private nodeService: NodesService) { }
 
   ngOnInit(): void {
@@ -45,10 +47,19 @@ export class SimulationPageComponent implements OnInit {
     this.newNode = new nodeDTO();
   }
 
-  addNewNode() {
-    //TODO:
+  addUser() {
+    //this.addingNodeModalVisible = false;
+    let tmp = "";
+    if(this.selectedNode)
+      tmp = this.selectedNode.name;
 
-    this.addingNodeModalVisible = false;
+      this.refreshing = true;
+
+      this.nodeService.createUser(tmp)
+        .subscribe( (data) => {
+
+          this.ngOnInit();
+        });
   }
 
   convertDTOtoNodesInternal(nodes: nodeDTO[]) {
@@ -129,10 +140,14 @@ export class SimulationPageComponent implements OnInit {
   }
 
   refreshNodes() {
+
+    this.networkNodes = [];
     this.networkNodes = this.convertDTOtoNodesInternal(this.getNodes());
     setTimeout( () => {
       this.updateMiningAllNodes();
       this.drawConnections();
+
+      this.refreshing = false;
     }, 100);
   }
 
