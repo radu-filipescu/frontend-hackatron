@@ -120,7 +120,8 @@ export class NodeViewComponent implements OnInit {
   }
 
   transactionModal(){
-
+    this.transactioning = true;
+    this.showUserMenu = false;
   }
 
   setMiningUser(){

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { faUserPlus, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Connection } from 'src/app/shared/DTOs/connection';
 import { nodeDTO } from 'src/app/shared/DTOs/NodeDTO';
@@ -11,6 +11,7 @@ import { nodeInternal } from './classes/nodeInternal';
   styleUrls: ['./simulation-page.component.scss']
 })
 export class SimulationPageComponent implements OnInit {
+  cliCommands: string[] = ["geth -datadir ./privateChain1 init ./genesis.json", "clef newaccount --keystore ./privateChain/keystore"];
 
   connectionList: Connection[] = [];
 
@@ -36,6 +37,12 @@ export class SimulationPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshNodes();
+
+    this.nodeService.updateCommands.subscribe(
+      data => {
+        this.cliCommands.push(data);
+      }
+    )
   }
 
   initializeNetwork() {

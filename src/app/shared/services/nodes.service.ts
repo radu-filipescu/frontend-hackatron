@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { globalCONSTS } from '../CONSTS';
 import { nodeDTO } from '../DTOs/NodeDTO';
 import { transferDTO } from '../DTOs/transferDTO';
@@ -11,30 +11,45 @@ export class NodesService {
 
   nodesAPIUrl: string = globalCONSTS.backendUrl + 'GlobalStatus/';
 
+  updateCommands: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(private httpClient: HttpClient) {
   }
 
   initializeBlockchain() {
+    this.updateCommands.emit("geth -datadir ./privateChain1 init ./genesis.json");
+    this.updateCommands.emit("geth --datadir ./privateChain1 --nodiscover --networkid 1234 --port 30306 --authrpc.port 8552 --rpc.enabledeprecatedpersonal --ipcpath ./privateChain1");
+
     return this.httpClient.post(this.nodesAPIUrl, "");
   }
 
   createUser(nodeName: string) {
+    this.updateCommands.emit("geth --exec web3.personal.newAccount(**********) attach \\\\.\\pipe\\" + nodeName);
+
     return this.httpClient.put<{'value': string}>(this.nodesAPIUrl + "createUser/", {'value': nodeName});
   }
 
   getUsersFromNode(nodeName: string) {
+    this.updateCommands.emit("geth --exec eth.accounts attach \\\\.\\pipe\\" + nodeName);
+
     return this.httpClient.put<string[]>(this.nodesAPIUrl + "getFromNode", {'value': nodeName});
   }
 
   setUserToMine(nodeName: string, userIdx: number) {
+    this.updateCommands.emit("geth --exec miner.setEtherbase(eth.accounts[" + userIdx +"]) attach \\\\.\\pipe\\" + nodeName);
+
     return this.httpClient.put(this.nodesAPIUrl + "setUserToMine", {'nodeName': nodeName, 'userIndex': userIdx});
   }
 
   startMining(nodeName: string) {
+    this.updateCommands.emit("geth --exec miner.start() attach \\\\.\\pipe\\" + nodeName);
+
     return this.httpClient.put(this.nodesAPIUrl + "startMining", {'value': nodeName});
   }
 
   stopMining(nodeName: string) {
+    this.updateCommands.emit("geth --exec miner.stop() attach \\\\.\\pipe\\" + nodeName);
+
     return this.httpClient.put(this.nodesAPIUrl + "stopMining", {'value': nodeName});
   }
 
@@ -43,6 +58,8 @@ export class NodesService {
   }
 
   transferFunds(input: transferDTO) {
+    this.updateCommands.emit("ggeth --exec web3.personal.sendTransaction({from:eth.accounts[" + input.senderIdx + "],to:eth.accounts[" + input.senderIdx + "],value:" + input.transferAmount + "},'*******') attach \\\\.\\pipe\\" + input.nodeName);
+
     return this.httpClient.put(this.nodesAPIUrl + 'transfer', input)
   }
 
