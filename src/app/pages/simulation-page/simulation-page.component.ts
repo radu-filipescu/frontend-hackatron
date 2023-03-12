@@ -11,7 +11,7 @@ import { nodeInternal } from './classes/nodeInternal';
   styleUrls: ['./simulation-page.component.scss']
 })
 export class SimulationPageComponent implements OnInit {
-  cliCommands: string[] = ["geth -datadir ./privateChain1 init ./genesis.json", "clef newaccount --keystore ./privateChain/keystore"];
+  cliCommands: string[] = [];
 
   connectionList: Connection[] = [];
 

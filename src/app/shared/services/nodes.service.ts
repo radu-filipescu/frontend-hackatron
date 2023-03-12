@@ -54,7 +54,7 @@ export class NodesService {
   }
 
   balance(nodeName: string, userIdx: number) {
-    return this.httpClient.put<number>(this.nodesAPIUrl + "balance", {'nodeName': nodeName, 'userIndex': userIdx});
+    return this.httpClient.put<string>(this.nodesAPIUrl + "balance", {'nodeName': nodeName, 'userIndex': userIdx});
   }
 
   transferFunds(input: transferDTO) {

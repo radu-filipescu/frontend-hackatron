@@ -144,16 +144,12 @@ export class NodeViewComponent implements OnInit {
   }
 
   sendTransfer() {
-    console.log(this.transferDTO);
-
     this.nodeService.transferFunds(this.transferDTO)
       .subscribe( () => {
         console.log('transfer made');
+
+        this.sumModalVisible = false;
+        this.transferDTO = new transferDTO();
       });
-
-
-    this.sumModalVisible = false;
-    this.transferDTO = new transferDTO();
   }
-
 }
