@@ -13,3 +13,19 @@
 .user-wrapper {
   font-size: 50px;
 }
+
+.user-menu{
+  background-color: #2C3333;
+  border-radius: 4px;
+  position:absolute;
+  padding: 5px;
+
+  a {
+    cursor: pointer;
+    display: block;
+
+    &:hover {
+      background-color: #171b1b;
+    }
+  }
+}
