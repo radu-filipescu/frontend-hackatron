@@ -154,11 +154,40 @@ export class SimulationPageComponent implements OnInit {
     this.nodeMenuX = event.x - 400;
     this.nodeMenuY = event.y - 120;
     this.nodeMenuFor = node;
+    this.showAddNodeMenu = false;
   }
 
   toggleMining(){
     this.nodeMenuFor.isMining = !this.nodeMenuFor.isMining;
     this.showNodeMenu = false;
+  }
+
+  showAddNodeMenu: boolean = false;
+
+  openAddNodeMenu(event: any){
+    event.preventDefault();
+
+    this.nodeMenuX = event.x - 400;
+    this.nodeMenuY = event.y - 120;
+
+    this.showAddNodeMenu = true;
+    this.showNodeMenu = false;
+  }
+
+  addNode(){
+    let newNodeInternal = new nodeInternal();
+
+    newNodeInternal.id = 'id';
+    newNodeInternal.name = 'name';
+    newNodeInternal.balance = 0;
+    newNodeInternal.password = 'password';
+    newNodeInternal.isMining = false;
+
+    newNodeInternal.displayX = this.nodeMenuX;
+    newNodeInternal.displayY = this.nodeMenuY;
+ 
+    this.networkNodes.push(newNodeInternal);
+
   }
 
 }

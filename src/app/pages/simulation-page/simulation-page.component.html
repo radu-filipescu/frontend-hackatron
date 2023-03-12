@@ -1,4 +1,4 @@
-<div class="page-wrapper" (click)="showNodeMenu = false">
+<div class="page-wrapper" (click)="showNodeMenu = false; showAddNodeMenu = false">
 
   <div class="left-area">
     <div class="left-header">
@@ -53,7 +53,7 @@
     <div class="simulation-area">
       <canvas #canvas 
         width="1600" height="830" 
-        (contextmenu)="onRightClick($event)"
+        (contextmenu)="openAddNodeMenu($event)"
         [ngClass]="{'hidden': selectedNode}"></canvas>
 
       <div *ngIf="!selectedNode">
@@ -71,6 +71,11 @@
               [ngStyle]="{ 'left.px': nodeMenuX, 'top.px': nodeMenuY }">
 
               <a (click)="toggleMining()">Start/Stop mining</a>
+            </div>
+            <div class="node-menu" *ngIf="showAddNodeMenu"
+              [ngStyle]="{ 'left.px': nodeMenuX, 'top.px': nodeMenuY }">
+
+              <a (click)="addNode()">Add node here</a>
             </div>
           </div>
           
